@@ -40,6 +40,11 @@ platforms = ["linux-64"]
 [tool.pixi.dependencies]
 python = "*"
 fire = "*"
+git = "*"
+toml = "*"
 
 [tool.pixi.pypi-dependencies]
 soma_dev = { path = ".", editable = true }
+
+[tool.pixi.activation]
+scripts = ["activate.sh"]
