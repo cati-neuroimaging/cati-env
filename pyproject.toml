@@ -36,17 +36,35 @@ soma-dev = "soma_dev.cli:main"
 packages=["soma_dev"]
 
 [tool.pixi.project]
-channels = ["conda-forge"]
+channels = ["conda-forge", "https://brainvisa.info/neuro-forge"]
 platforms = ["linux-64"]
 
 [tool.pixi.dependencies]
 fire = "*"
+python = "*"
+
+# Dependencies for brainvisa-cmake
+pyyaml = "*"
+dateutils = "*"
+cmake = "*"
+gcc = "*"
 git = "*"
 gitpython = "*"
-python = "*"
-toml = "*"
+gxx = "*"
+libglu = "*"
+libglvnd-devel-cos7-x86_64 = "*"
+libstdcxx-devel_linux-64 = "*"
+make = "*"
+mesa-libgl-devel-cos7-x86_64 = "*"
+mesalib-devel-only = "*"
 pip = "*"
-pyyaml = "*"
+pyaml = "*"
+pytest = "*"
+rattler-build = ">=0.13"
+six = "*"
+sphinx = "*"
+toml = "*"
+virtualgl = "*"
 
 [tool.pixi.pypi-dependencies]
 soma_dev = { path = ".", editable = true }
