@@ -1,4 +1,5 @@
 .pixi
 pixi.lock
 src
+build
 */__pycache__
