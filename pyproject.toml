@@ -32,6 +32,8 @@ repository = "https://github.com/brainvisa/soma-dev"
 [project.scripts]
 soma-dev = "soma_dev.cli:main"
 
+[tool.setuptools]
+packages=["soma_dev"]
 
 [tool.pixi.project]
 channels = ["conda-forge"]
@@ -43,6 +45,7 @@ git = "*"
 gitpython = "*"
 python = "*"
 toml = "*"
+pip = "*"
 pyyaml = "*"
 
 [tool.pixi.pypi-dependencies]
