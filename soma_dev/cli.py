@@ -43,7 +43,7 @@ class Commands:
     def apply_plan(self):
         raise NotImplementedError()
 
-    def graphviz(self, packages: str = "*", conda_forge=False):
+    def graphviz(self, packages: str = "*", conda_forge=False, versions=False):
         """Output a dot file for selected packages (or for all known packages by default)"""
         selector = re.compile("|".join(f"(?:{fnmatch.translate(i)})" for i in packages))
         neuro_forge_packages = set()
@@ -67,8 +67,11 @@ class Commands:
         all_soma_dev_packages = set(find_soma_dev_packages())
         for package in selected_recipes:
             recipe = recipes[package]
-            version = recipe["package"]["version"]
-            label = f'"{package} ({version})"'
+            if versions:
+                version = recipe["package"]["version"]
+                label = f'"{package} ({version})"'
+            else:
+                label = f'"{package}"'
             if recipe["soma-dev"]["type"] == "interpreted":
                 print(f'  "{package}" [label={label},fillcolor="aquamarine2"]')
             elif recipe["soma-dev"]["type"] == "compiled":
