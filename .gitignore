@@ -2,4 +2,7 @@
 pixi.lock
 src
 build
+plan
+conf/build_info.json
 */__pycache__
+*.egg-info

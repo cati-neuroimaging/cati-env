@@ -1,5 +1,6 @@
 import copy
 import fnmatch
+import json
 import os
 import pathlib
 import re
@@ -102,14 +103,18 @@ class Commands:
         last_published_soma_dev_version = None
         if publication_directory is not None:
             release_history_file = (
-                publication_directory / f"soma-dev-{environment_version}.yaml"
+                publication_directory / f"soma-dev-{environment_version}.json"
             )
             if release_history_file.exists():
                 with open(release_history_file) as f:
-                    release_history = yaml.safe_load(f)
+                    release_history = json.load(f)
                 last_published_soma_dev_version = list(
                     release_history["soma-dev"].keys()
                 )[-1]
+                print(f"Release history file: {release_history_file}")
+            else:
+                print(f"WARNING: {release_history_file} does not exist")
+
 
         # Set the new soma-dev full version by incrementing last published version patch
         # number or setting it to 0
@@ -137,8 +142,8 @@ class Commands:
 
         # Build string for new packages
         build_string = (
-            f"{next_environment_version}-"
-            f"{sys.version_info[0]}.{sys.version_info[1]}"
+            f"{future_published_soma_dev_version.replace('.','_')}-"
+            f"py{sys.version_info[0]}{sys.version_info[1]}"
         )
 
         # List of actions stored in the plan file
@@ -259,20 +264,20 @@ class Commands:
                             selection_modified = True
 
         # Generate rattler-build recipe and action for soma-dev package
-        print(f"Generate recipe for soma-dev {next_environment_version}")
+        print(f"Generate recipe for soma-dev {future_published_soma_dev_version}")
         (plan_dir / "recipes" / "soma-dev").mkdir(exist_ok=True, parents=True)
         with open(plan_dir / "recipes" / "soma-dev" / "recipe.yaml", "w") as f:
             yaml.safe_dump(
                 {
                     "package": {
                         "name": "soma-dev",
-                        "version": next_environment_version,
+                        "version": future_published_soma_dev_version,
                     },
                     "build": {
-                        "string": build_string,
+                        "string": f"py{sys.version_info[0]}{sys.version_info[1]}",
                         "script": (
                             "mkdir --parents $PREFIX/share/soma\n"
-                            f"echo '{next_environment_version}' > soma-dev.version"
+                            f"echo '{future_published_soma_dev_version}' > soma-dev.version"
                         ),
                     },
                     "requirements": {
@@ -306,7 +311,7 @@ class Commands:
 
             # Add dependency to soma-dev package
             recipe["requirements"]["run"].append(
-                f"soma-dev>={environment_version},<{next_environment_version}"
+                f"soma-dev>={future_published_soma_dev_version},<{next_environment_version}"
             )
 
             # Remove soma-dev specific data from recipe
