@@ -5,35 +5,41 @@ import yaml
 import brainvisa_cmake.brainvisa_projects as brainvisa_projects
 
 
-def read_recipes():
+def read_recipes(soma_root):
     """
     Iterate over all recipes files defined in soma-forge.
     """
-    soma_root = pathlib.Path(os.environ["SOMA_ROOT"])
-    for component_src in (soma_root / "src").iterdir():
+    src_dir = soma_root / "src"
+    for component_src in src_dir.iterdir():
         recipe_file = component_src / "soma-dev" / "soma-recipe.yaml"
         if recipe_file.exists():
             with open(recipe_file) as f:
                 recipe = yaml.safe_load(f)
 
-                # Set recipe version as component version
+                # Set main component version as recipe version
                 pinfo = brainvisa_projects.read_project_info(component_src)
                 if pinfo:
                     project, component, component_version, build_model = pinfo
-                    recipe["package"]["version"] = component_version
+                    recipe["package"]["version"] = str(component_version)
                 else:
                     print(
                         f"WARNING: directory {component_src} does not contain project_info.cmake, python/*/info.py or */info.py file"
                     )
+                
+                # Replace git location by source directories in component list
+                components = {component_src.name: component_src}
+                for component in recipe["soma-dev"].get("components", {}).keys():
+                    components[component] = src_dir / component
+                recipe["soma-dev"]["components"] = components
                 yield recipe
 
 
-def selected_recipes(selection=None):
+def selected_recipes(soma_root, selection=None):
     """
     Iterate over recipes selected in configuration and their dependencies.
     """
     # Read recipes
-    recipes = {r["package"]["name"]: r for r in read_recipes()}
+    recipes = {r["package"]["name"]: r for r in read_recipes(soma_root)}
 
     all_packages = set(recipes)
 
@@ -73,12 +79,12 @@ def selected_recipes(selection=None):
         stack.extend(i for i in dependencies if i not in done)
 
 
-def sorted_recipies():
+def sorted_recipies(soma_root):
     """
     Iterate over recipes sorted according to their dependencies starting with a
     package without dependency.
     """
-    recipes = {r["package"]["name"]: r for r in selected_recipes()}
+    recipes = {r["package"]["name"]: r for r in selected_recipes(soma_root)}
     ready = set()
     inverted_dependencies = {}
     for package, recipe in recipes.items():
@@ -99,6 +105,6 @@ def sorted_recipies():
                 ready.add(dependent)
 
 
-def find_soma_dev_packages():
-    for recipe in read_recipes():
+def find_soma_dev_packages(soma_root):
+    for recipe in read_recipes(soma_root):
         yield recipe["package"]["name"]
