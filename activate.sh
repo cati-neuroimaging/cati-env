@@ -12,3 +12,10 @@ if [ ! -e "$SOMA_ROOT/src/brainvisa-cmake" ] ; then
     mkdir -p "$SOMA_ROOT/src"
     git clone https://github.com/brainvisa/brainvisa-cmake "$SOMA_ROOT/src/brainvisa-cmake"
 fi
+
+# Ensure that build-info.json file exists
+if [ ! -e "$SOMA_ROOT/conf/build_info.json" ] ; then
+    echo '{}' > "$SOMA_ROOT/conf/build_info.json"
+fi
+
+

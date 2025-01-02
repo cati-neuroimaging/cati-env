@@ -6,6 +6,7 @@ import re
 import shutil
 import subprocess
 import sys
+import types
 
 import fire
 import git
@@ -13,6 +14,7 @@ import yaml
 
 from .defaults import default_publication_directory
 from .recipes import sorted_recipies, find_soma_dev_packages
+import soma_dev.plan
 
 
 class Commands:
@@ -202,7 +204,8 @@ class Commands:
                 recipe["build"]["script"] = "\n".join(
                     (
                         f"cd '{self.soma_root}'",
-                        f"pixi run --manifest-path='{self.soma_root}/pixi.toml' bash << END",
+                        f"pixi run --manifest-path='{self.soma_root}/pyproject.toml' bash << END",
+                        'set -x',
                         'cd "\\$SOMA_ROOT/build"',
                         'export BRAINVISA_INSTALL_PREFIX="$PREFIX"',
                         f"for component in {' '.join(components)}; do",
@@ -363,7 +366,18 @@ class Commands:
             )
 
     def apply_plan(self):
-        raise NotImplementedError()
+        with open(self.soma_root / "plan" / "actions.yaml") as f:
+            actions = yaml.safe_load(f)
+        context = types.SimpleNamespace()
+        context.soma_root = self.soma_root
+        for action in actions:
+            if action.get("status") != "success":
+                getattr(soma_dev.plan, action["action"])(
+                    context, *action.get("args", []), **action.get("kwargs", {})
+                )
+                action["status"] = "success"
+                with open(self.soma_root / "plan" / "actions.yaml", "w") as f:
+                    yaml.safe_dump(actions, f)
 
     def graphviz(self, packages: str = "*", conda_forge=False, versions=False):
         """Output a dot file for selected packages (or for all known packages by default)"""
