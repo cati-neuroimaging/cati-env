@@ -20,7 +20,7 @@ A soma-dev instance contains:
 
 # How to use a soma-dev instance ?
 
-A soma-dev instance is created by cloning https://gitbub.com/brainvisa/soma-dev and selecting the appropriate branch. The sources of the project contains a Pixi configuration file to setup a ready to use brainvisa-cmake. One has just to run `pixi shell` to install the environment. Customization can be done by editing appropriate files such as `conf/bv_makeg.cfg`.
+A soma-dev instance is created by cloning https://gitbub.com/brainvisa/soma-dev using the appropriate branch. The sources of the project contains a Pixi configuration file to setup a ready to use brainvisa-cmake. One has just to run `pixi shell` to install the environment. Customization can be done by editing appropriate files such as `conf/bv_makeg.cfg`.
 
 # soma-dev: a new command in branvisa-cmake
 
