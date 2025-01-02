@@ -67,12 +67,14 @@ class Commands:
         all_soma_dev_packages = set(find_soma_dev_packages())
         for package in selected_recipes:
             recipe = recipes[package]
+            version = recipe["package"]["version"]
+            label = f'"{package} ({version})"'
             if recipe["soma-dev"]["type"] == "interpreted":
-                print(f'  "{package}" [fillcolor="aquamarine2"]')
+                print(f'  "{package}" [label={label},fillcolor="aquamarine2"]')
             elif recipe["soma-dev"]["type"] == "compiled":
-                print(f'  "{package}" [fillcolor="darkgreen",fontcolor=white]')
+                print(f'  "{package}" [label={label},fillcolor="darkgreen",fontcolor=white]')
             elif recipe["soma-dev"]["type"] == "virtual":
-                print(f'  "{package}" [fillcolor="powderblue"]')
+                print(f'  "{package}" [label={label},fillcolor="powderblue"]')
             else:
                 print(f'  "{package}" [fillcolor="bisque"]')
             for dependency in recipe["soma-dev"].get("internal-dependencies", []):

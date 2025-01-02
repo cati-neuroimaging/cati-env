@@ -2,6 +2,8 @@ import os
 import pathlib
 import yaml
 
+import brainvisa_cmake.brainvisa_projects as brainvisa_projects
+
 
 def read_recipes():
     """
@@ -13,6 +15,16 @@ def read_recipes():
         if recipe_file.exists():
             with open(recipe_file) as f:
                 recipe = yaml.safe_load(f)
+
+                # Set recipe version as component version
+                pinfo = brainvisa_projects.read_project_info(component_src)
+                if pinfo:
+                    project, component, component_version, build_model = pinfo
+                    recipe["package"]["version"] = component_version
+                else:
+                    print(
+                        f"WARNING: directory {component_src} does not contain project_info.cmake, python/*/info.py or */info.py file"
+                    )
                 yield recipe
 
 
@@ -85,6 +97,7 @@ def sorted_recipies():
             dependencies = recipe.get("internal-dependencies", [])
             if all(d in done for d in dependencies):
                 ready.add(dependent)
+
 
 def find_soma_dev_packages():
     for recipe in read_recipes():
