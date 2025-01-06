@@ -1,5 +1,6 @@
 import copy
 import fnmatch
+import itertools
 import json
 import os
 import pathlib
@@ -14,7 +15,7 @@ import git
 import yaml
 
 from .defaults import default_publication_directory
-from .recipes import sorted_recipies, find_soma_dev_packages
+from .recipes import sorted_recipies, find_soma_dev_packages, read_recipes
 import soma_dev.plan
 
 
@@ -43,8 +44,191 @@ class Commands:
     def all(self):
         return subprocess.call(["bv_maker"])
 
-    def version_plan(self):
-        raise NotImplementedError()
+    def version_plan(
+        self,
+        publication_directory: str = default_publication_directory,
+        packages: str = "*",
+        force: bool = False,
+    ):
+        if not publication_directory or publication_directory.lower() == "none":
+            publication_directory = None
+        else:
+            publication_directory = pathlib.Path(publication_directory).absolute()
+        if publication_directory is not None and not publication_directory.exists():
+            raise RuntimeError(
+                f"Publication directory {publication_directory} does not exist"
+            )
+
+        selector = re.compile("|".join(f"(?:{fnmatch.translate(i)})" for i in packages))
+
+        plan_dir = self.soma_root / "plan"
+
+        # Check if a plan file already exists and can be erased
+        if not force:
+            actions_file = plan_dir / "actions.yaml"
+            if actions_file.exists():
+                with open(actions_file) as f:
+                    actions = yaml.safe_load(f)
+                if any(action.get("status") == "success" for action in actions):
+                    raise RuntimeError(
+                        f"A plan already exists in {plan_dir} and was used. "
+                        "Erase it or use --force option"
+                    )
+
+        # Erase existing plan
+        if plan_dir.exists():
+            print(f"Erasing existing plan: {plan_dir}")
+            shutil.rmtree(plan_dir)
+        plan_dir.mkdir()
+
+        # Read environment version
+        with open(self.soma_root / "conf" / "soma-dev.yaml") as f:
+            environment_version = yaml.safe_load(f)["version"]
+
+        # Get the release history for selected environment (e.g.
+        # environment="6.0") from the publication directory.
+        # The release history is located in the
+        # f"soma-dev-{environment_version}.yaml" file and contains a dict
+        # with the following structure:
+        #    "soma-dev": for each version of soma-dev package, contain a dict
+        #        associating packages with their version at the time of soma-dev
+        #        release.
+        #    "packages": for each package, contains a dict with all published
+        #        versions and, for each version, the brainvisa-cmake components
+        #        associated to their git changeset.
+        release_history = {"soma-dev": {}, "packages": {}}
+        last_published_soma_dev_version = None
+        if publication_directory is not None:
+            release_history_file = (
+                publication_directory / f"soma-dev-{environment_version}.json"
+            )
+            if release_history_file.exists():
+                with open(release_history_file) as f:
+                    release_history = json.load(f)
+                last_published_soma_dev_version = list(
+                    release_history["soma-dev"].keys()
+                )[-1]
+                print(f"Release history file: {release_history_file}")
+            else:
+                print(f"WARNING: {release_history_file} does not exist")
+
+        actions = []
+        
+        for recipe in read_recipes(self.soma_root):
+            package = recipe["package"]["name"]
+            if not selector.match(package):
+                print(f"Package {package} excluded from selection")
+                continue
+            components = list(recipe["soma-dev"].get("components", {}).keys())
+            if components:
+                # Parse components and do the following:
+                #  - put error messages in src_errors if source trees are not clean
+                #  - Get current git changeset of each component source tree in
+                #    changesets
+                #  - Add package to selected_packages if any component has changed
+                #    since the last release
+                changesets = {}
+                for component in components:
+                    src = self.soma_root / "src" / component
+                    repo = git.Repo(src)
+                    if repo.is_dirty():
+                        print(f"WARNING: repository {src} contains uncomited files")
+                    elif repo.untracked_files:
+                        print(f"WARNING: repository {src} has local modifications")
+                    changesets[component] = str(repo.head.commit)
+
+                latest_changesets = None
+                latest_release_version = None
+                if last_published_soma_dev_version is not None:
+                    latest_release_version = release_history["soma-dev"][
+                        last_published_soma_dev_version
+                    ].get(package)
+                    latest_changesets = (
+                        release_history["packages"]
+                        .get(package)
+                        .get(latest_release_version)
+                    )
+                if not latest_changesets:
+                    print(f"Package {package} not found in release history")
+                elif changesets != latest_changesets:
+                    print(f"Package {package} modified since last release")
+                    if recipe["package"]["version"] == latest_release_version:
+                        package_version = tuple(
+                            int(i) for i in recipe["package"]["version"].split(".")
+                        )
+                        new_version = package_version[:-1] + (package_version[-1] + 1,)
+                        new_version = ".".join(str(i) for i in new_version)
+                        print(
+                            f"Set {package} version from {latest_release_version} to {new_version}"
+                        )
+                        # Find file to change
+                        src = next(recipe["soma-dev"]["components"].values())
+                        file = src / "project_info.cmake"
+                        if file.exists():
+                            version_regexps = (
+                                re.compile(
+                                    r"(\bset\s*\(\s*BRAINVISA_PACKAGE_VERSION_MAJOR\s*)"
+                                    r"([0-9]+)(\s*\))",
+                                    re.IGNORECASE,
+                                ),
+                                re.compile(
+                                    r"(\bset\s*\(\s*BRAINVISA_PACKAGE_VERSION_MINOR\s*)"
+                                    r"([0-9]+)(\s*\))",
+                                    re.IGNORECASE,
+                                ),
+                                re.compile(
+                                    r"(\bset\s*\(\s*BRAINVISA_PACKAGE_VERSION_PATCH\s*)"
+                                    r"([0-9]+)(\s*\))",
+                                    re.IGNORECASE,
+                                ),
+                            )
+                        else:
+                            version_regexps = (
+                                re.compile(r"(\bversion_major\s*=\s*)([0-9]+)(\b)"),
+                                re.compile(r"(\bversion_minor\s*=\s*)([0-9]+)(\b)"),
+                                re.compile(r"(\bversion_micro\s*=\s*)([0-9]+)(\b)"),
+                            )
+                            files = list(
+                                itertools.chain(
+                                    src.glob("info.py"),
+                                    src.glob("*/info.py"),
+                                    src.glob("python/*/info.py"),
+                                )
+                            )
+                            if not files:
+                                raise RuntimeError(
+                                    f"Cannot find component version file (info.py or project_info.cmake) in {src}"
+                                )
+                            file = files[0]
+                        with open(file) as f:
+                            file_contents = f.read()
+                        for regex, version_component in zip(
+                            version_regexps, new_version
+                        ):
+                            file_contents, _ = regex.subn(
+                                f"\\g<1>{version_component:d}\\g<3>", file_contents
+                            )
+                        print(
+                            f"Create action to modify {file} to set {package} version from {latest_release_version} to {new_version}"
+                        )
+                        actions.append(
+                            {
+                                "action": "modify_file",
+                                "kwargs": {
+                                    "file": str(file),
+                                    "file_contents": file_contents,
+                                },
+                            }
+                        )
+
+                else:
+                    print(f"No change detected in package {package}")
+
+        with open(plan_dir / "actions.yaml", "w") as f:
+            yaml.safe_dump(
+                actions,
+                f,
+            )
 
     def packaging_plan(
         self,
@@ -115,7 +299,6 @@ class Commands:
             else:
                 print(f"WARNING: {release_history_file} does not exist")
 
-
         # Set the new soma-dev full version by incrementing last published version patch
         # number or setting it to 0
         if last_published_soma_dev_version:
@@ -142,7 +325,7 @@ class Commands:
 
         # Build string for new packages
         build_string = (
-            f"{future_published_soma_dev_version.replace('.','_')}-"
+            f"{future_published_soma_dev_version.replace('.','_')}_"
             f"py{sys.version_info[0]}{sys.version_info[1]}"
         )
 
@@ -210,7 +393,7 @@ class Commands:
                     (
                         f"cd '{self.soma_root}'",
                         f"pixi run --manifest-path='{self.soma_root}/pyproject.toml' bash << END",
-                        'set -x',
+                        "set -x",
                         'cd "\\$SOMA_ROOT/build"',
                         'export BRAINVISA_INSTALL_PREFIX="$PREFIX"',
                         f"for component in {' '.join(components)}; do",
