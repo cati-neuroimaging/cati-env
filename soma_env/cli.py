@@ -113,7 +113,7 @@ class Commands:
                 print(f"WARNING: {release_history_file} does not exist")
 
         actions = []
-        
+
         for recipe in read_recipes(self.soma_root):
             package = recipe["package"]["name"]
             if not selector.match(package):
@@ -324,10 +324,7 @@ class Commands:
         next_environment_version = ".".join(next_environment_version)
 
         # Build string for new packages
-        build_string = (
-            f"{future_published_soma_env_version.replace('.','_')}_"
-            f"py{sys.version_info[0]}{sys.version_info[1]}"
-        )
+        build_string = f"py{sys.version_info[0]}{sys.version_info[1]}"
 
         # List of actions stored in the plan file
         actions = []
@@ -339,8 +336,6 @@ class Commands:
         # modification since last packaging
         for recipe in sorted_recipies(self.soma_root):
             package = recipe["package"]["name"]
-            if development_environment:
-                recipe["package"]["version"] = future_published_soma_env_version
             if not selector.match(package):
                 print(f"Package {package} excluded from selection")
                 continue
@@ -477,6 +472,8 @@ class Commands:
         for package, recipe in recipes.items():
             if package not in selected_packages:
                 continue
+            if development_environment:
+                recipe["package"]["version"] = future_published_soma_env_version
             print(f"Generate recipe for {package} {recipe['package']['version']}")
             if not force:
                 src_errors = recipe["soma-env"].get("src_errors")
