@@ -271,6 +271,7 @@ class Commands:
         # Read environment version
         with open(self.soma_root / "conf" / "soma-env.yaml") as f:
             environment_version = yaml.safe_load(f)["version"]
+        development_environment = environment_version.startswith("0.")
 
         # Get the release history for selected environment (e.g.
         # environment="6.0") from the publication directory.
@@ -314,7 +315,6 @@ class Commands:
         else:
             future_published_soma_env_version = f"{environment_version}.0"
             release_history["soma-env"][future_published_soma_env_version] = {}
-        development_environment = environment_version.startswith("0.")
 
         # Next environment version is used to build dependencies strings
         # for components:
@@ -339,6 +339,8 @@ class Commands:
         # modification since last packaging
         for recipe in sorted_recipies(self.soma_root):
             package = recipe["package"]["name"]
+            if development_environment:
+                recipe["package"]["version"] = future_published_soma_env_version
             if not selector.match(package):
                 print(f"Package {package} excluded from selection")
                 continue

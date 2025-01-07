@@ -9,6 +9,11 @@ def read_recipes(soma_root):
     """
     Iterate over all recipes files defined in soma-forge.
     """
+    # Read environment version
+    with open(soma_root / "conf" / "soma-env.yaml") as f:
+        environment_version = yaml.safe_load(f)["version"]
+    development_environment = environment_version.startswith("0.")
+
     src_dir = soma_root / "src"
     for component_src in src_dir.iterdir():
         recipe_file = component_src / "soma-env" / "soma-env-recipe.yaml"
@@ -16,15 +21,19 @@ def read_recipes(soma_root):
             with open(recipe_file) as f:
                 recipe = yaml.safe_load(f)
 
-                # Set main component version as recipe version
-                pinfo = brainvisa_projects.read_project_info(component_src)
-                if pinfo:
-                    project, component, component_version, build_model = pinfo
-                    recipe["package"]["version"] = str(component_version)
+                if development_environment:
+                    # Set recipe version to development environment version
+                    recipe["package"]["version"] = environment_version
                 else:
-                    print(
-                        f"WARNING: directory {component_src} does not contain project_info.cmake, python/*/info.py or */info.py file"
-                    )
+                    # Set main component version as recipe version
+                    pinfo = brainvisa_projects.read_project_info(component_src)
+                    if pinfo:
+                        project, component, component_version, build_model = pinfo
+                        recipe["package"]["version"] = str(component_version)
+                    else:
+                        print(
+                            f"WARNING: directory {component_src} does not contain project_info.cmake, python/*/info.py or */info.py file"
+                        )
                 
                 # Replace git location by source directories in component list
                 components = {component_src.name: component_src}
