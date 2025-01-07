@@ -105,6 +105,6 @@ def sorted_recipies(soma_root):
                 ready.add(dependent)
 
 
-def find_soma_dev_packages(soma_root):
+def find_soma_env_packages(soma_root):
     for recipe in read_recipes(soma_root):
         yield recipe["package"]["name"]

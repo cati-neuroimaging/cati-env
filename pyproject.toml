@@ -23,17 +23,17 @@ requires = ["setuptools >= 61.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.dynamic]
-version = {attr = "soma_dev.__version__"}
+version = {attr = "soma_env.__version__"}
 
 [project.urls]
 repository = "https://github.com/brainvisa/soma-env"
 
 
 [project.scripts]
-soma-env = "soma_dev.cli:main"
+soma-env = "soma_env.cli:main"
 
 [tool.setuptools]
-packages=["soma_dev"]
+packages=["soma_env"]
 
 [tool.pixi.project]
 channels = ["conda-forge", "https://brainvisa.info/neuro-forge"]
@@ -67,7 +67,7 @@ toml = "*"
 virtualgl = "*"
 
 [tool.pixi.pypi-dependencies]
-soma_dev = { path = ".", editable = true }
+soma_env = { path = ".", editable = true }
 
 [tool.pixi.activation]
 scripts = ["activate.sh"]

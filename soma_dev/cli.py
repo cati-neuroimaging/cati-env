@@ -15,8 +15,8 @@ import git
 import yaml
 
 from .defaults import default_publication_directory
-from .recipes import sorted_recipies, find_soma_dev_packages, read_recipes
-import soma_dev.plan
+from .recipes import sorted_recipies, find_soma_env_packages, read_recipes
+import soma_env.plan
 
 
 class Commands:
@@ -97,7 +97,7 @@ class Commands:
         #        versions and, for each version, the brainvisa-cmake components
         #        associated to their git changeset.
         release_history = {"soma-env": {}, "packages": {}}
-        last_published_soma_dev_version = None
+        last_published_soma_env_version = None
         if publication_directory is not None:
             release_history_file = (
                 publication_directory / f"soma-env-{environment_version}.json"
@@ -105,7 +105,7 @@ class Commands:
             if release_history_file.exists():
                 with open(release_history_file) as f:
                     release_history = json.load(f)
-                last_published_soma_dev_version = list(
+                last_published_soma_env_version = list(
                     release_history["soma-env"].keys()
                 )[-1]
                 print(f"Release history file: {release_history_file}")
@@ -139,9 +139,9 @@ class Commands:
 
                 latest_changesets = None
                 latest_release_version = None
-                if last_published_soma_dev_version is not None:
+                if last_published_soma_env_version is not None:
                     latest_release_version = release_history["soma-env"][
-                        last_published_soma_dev_version
+                        last_published_soma_env_version
                     ].get(package)
                     latest_changesets = (
                         release_history["packages"]
@@ -284,7 +284,7 @@ class Commands:
         #        versions and, for each version, the brainvisa-cmake components
         #        associated to their git changeset.
         release_history = {"soma-env": {}, "packages": {}}
-        last_published_soma_dev_version = None
+        last_published_soma_env_version = None
         if publication_directory is not None:
             release_history_file = (
                 publication_directory / f"soma-env-{environment_version}.json"
@@ -292,7 +292,7 @@ class Commands:
             if release_history_file.exists():
                 with open(release_history_file) as f:
                     release_history = json.load(f)
-                last_published_soma_dev_version = list(
+                last_published_soma_env_version = list(
                     release_history["soma-env"].keys()
                 )[-1]
                 print(f"Release history file: {release_history_file}")
@@ -301,19 +301,19 @@ class Commands:
 
         # Set the new soma-env full version by incrementing last published version patch
         # number or setting it to 0
-        if last_published_soma_dev_version:
+        if last_published_soma_env_version:
             # Increment patch number
-            version, patch = last_published_soma_dev_version.rsplit(".", 1)
+            version, patch = last_published_soma_env_version.rsplit(".", 1)
             patch = int(patch) + 1
-            future_published_soma_dev_version = f"{version}.{patch}"
-            release_history["soma-env"][future_published_soma_dev_version] = (
+            future_published_soma_env_version = f"{version}.{patch}"
+            release_history["soma-env"][future_published_soma_env_version] = (
                 copy.deepcopy(
-                    release_history["soma-env"][last_published_soma_dev_version]
+                    release_history["soma-env"][last_published_soma_env_version]
                 )
             )
         else:
-            future_published_soma_dev_version = f"{environment_version}.0"
-            release_history["soma-env"][future_published_soma_dev_version] = {}
+            future_published_soma_env_version = f"{environment_version}.0"
+            release_history["soma-env"][future_published_soma_env_version] = {}
         development_environment = environment_version.startswith("0.")
 
         # Next environment version is used to build dependencies strings
@@ -325,7 +325,7 @@ class Commands:
 
         # Build string for new packages
         build_string = (
-            f"{future_published_soma_dev_version.replace('.','_')}_"
+            f"{future_published_soma_env_version.replace('.','_')}_"
             f"py{sys.version_info[0]}{sys.version_info[1]}"
         )
 
@@ -362,14 +362,14 @@ class Commands:
                     changesets[component] = str(repo.head.commit)
 
                 latest_changesets = None
-                if last_published_soma_dev_version is not None:
+                if last_published_soma_env_version is not None:
 
                     latest_changesets = (
                         release_history["packages"]
                         .get(package)
                         .get(
                             release_history["soma-env"][
-                                last_published_soma_dev_version
+                                last_published_soma_env_version
                             ].get(package)
                         )
                     )
@@ -447,20 +447,20 @@ class Commands:
                             selection_modified = True
 
         # Generate rattler-build recipe and action for soma-env package
-        print(f"Generate recipe for soma-env {future_published_soma_dev_version}")
+        print(f"Generate recipe for soma-env {future_published_soma_env_version}")
         (plan_dir / "recipes" / "soma-env").mkdir(exist_ok=True, parents=True)
         with open(plan_dir / "recipes" / "soma-env" / "recipe.yaml", "w") as f:
             yaml.safe_dump(
                 {
                     "package": {
                         "name": "soma-env",
-                        "version": future_published_soma_dev_version,
+                        "version": future_published_soma_env_version,
                     },
                     "build": {
                         "string": f"py{sys.version_info[0]}{sys.version_info[1]}",
                         "script": (
                             "mkdir --parents $PREFIX/share/soma\n"
-                            f"echo '{future_published_soma_dev_version}' > soma-env.version"
+                            f"echo '{future_published_soma_env_version}' > soma-env.version"
                         ),
                     },
                     "requirements": {
@@ -494,7 +494,7 @@ class Commands:
 
             # Add dependency to soma-env package
             recipe["requirements"]["run"].append(
-                f"soma-env>={future_published_soma_dev_version},<{next_environment_version}"
+                f"soma-env>={future_published_soma_env_version},<{next_environment_version}"
             )
 
             # Remove soma-env specific data from recipe
@@ -513,7 +513,7 @@ class Commands:
                 }
             )
 
-            release_history["soma-env"][future_published_soma_dev_version][package] = (
+            release_history["soma-env"][future_published_soma_env_version][package] = (
                 recipe["package"]["version"]
             )
             release_history["packages"].setdefault(package, {})[
@@ -560,7 +560,7 @@ class Commands:
         context.soma_root = self.soma_root
         for action in actions:
             if action.get("status") != "success":
-                getattr(soma_dev.plan, action["action"])(
+                getattr(soma_env.plan, action["action"])(
                     context, *action.get("args", []), **action.get("kwargs", {})
                 )
                 action["status"] = "success"
@@ -591,7 +591,7 @@ class Commands:
                 if dependency not in selected_recipes
             )
 
-        all_soma_dev_packages = set(find_soma_dev_packages(self.soma_root))
+        all_soma_env_packages = set(find_soma_env_packages(self.soma_root))
         for package in selected_recipes:
             recipe = recipes[package]
             if versions:
@@ -614,7 +614,7 @@ class Commands:
                     print(f'  "{package}" -> "{dependency}"')
                     linked.add((package, dependency))
             for dependency in recipe.get("requirements", {}).get("run", []):
-                if dependency in all_soma_dev_packages:
+                if dependency in all_soma_env_packages:
                     neuro_forge_packages.add(dependency)
                     print(f'  "{package}" -> "{dependency}"')
                 elif conda_forge:
