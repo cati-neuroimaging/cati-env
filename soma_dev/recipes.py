@@ -11,7 +11,7 @@ def read_recipes(soma_root):
     """
     src_dir = soma_root / "src"
     for component_src in src_dir.iterdir():
-        recipe_file = component_src / "soma-dev" / "soma-recipe.yaml"
+        recipe_file = component_src / "soma-env" / "soma-env-recipe.yaml"
         if recipe_file.exists():
             with open(recipe_file) as f:
                 recipe = yaml.safe_load(f)
@@ -28,9 +28,9 @@ def read_recipes(soma_root):
                 
                 # Replace git location by source directories in component list
                 components = {component_src.name: component_src}
-                for component in recipe["soma-dev"].get("components", {}).keys():
+                for component in recipe["soma-env"].get("components", {}).keys():
                     components[component] = src_dir / component
-                recipe["soma-dev"]["components"] = components
+                recipe["soma-env"]["components"] = components
                 yield recipe
 
 
@@ -75,7 +75,7 @@ def selected_recipes(soma_root, selection=None):
         recipe = recipes[package]
         yield recipe
         done.add(package)
-        dependencies = recipe["soma-dev"].get("internal-dependencies", [])
+        dependencies = recipe["soma-env"].get("internal-dependencies", [])
         stack.extend(i for i in dependencies if i not in done)
 
 
@@ -88,7 +88,7 @@ def sorted_recipies(soma_root):
     ready = set()
     inverted_dependencies = {}
     for package, recipe in recipes.items():
-        dependencies = recipe["soma-dev"].get("internal-dependencies", [])
+        dependencies = recipe["soma-env"].get("internal-dependencies", [])
         if not dependencies:
             ready.add(package)
         for dependency in dependencies:

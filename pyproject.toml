@@ -1,5 +1,5 @@
 [project]
-name = "soma-dev"
+name = "soma-env"
 dynamic = ["version"]
 readme = "README.md"
 requires-python = ">=3.10"
@@ -26,11 +26,11 @@ build-backend = "setuptools.build_meta"
 version = {attr = "soma_dev.__version__"}
 
 [project.urls]
-repository = "https://github.com/brainvisa/soma-dev"
+repository = "https://github.com/brainvisa/soma-env"
 
 
 [project.scripts]
-soma-dev = "soma_dev.cli:main"
+soma-env = "soma_dev.cli:main"
 
 [tool.setuptools]
 packages=["soma_dev"]

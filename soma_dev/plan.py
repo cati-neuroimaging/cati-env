@@ -146,10 +146,10 @@ def publish(
             dest.parent.mkdir(exist_ok=True)
             shutil.copy2(src, dest)
             copied.append(dest)
-        release_history_file = publication_dir / f"soma-dev-{environment}.json"
+        release_history_file = publication_dir / f"soma-env-{environment}.json"
         if release_history_file.exists():
             release_history_file_backup = (
-                publication_dir / f"soma-dev-{environment}.json.backup"
+                publication_dir / f"soma-env-{environment}.json.backup"
             )
             os.rename(release_history_file, release_history_file_backup)
         with open(release_history_file, "w") as f:
