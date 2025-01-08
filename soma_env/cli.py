@@ -82,8 +82,8 @@ class Commands:
         plan_dir.mkdir()
 
         # Read environment version
-        with open(self.soma_root / "conf" / "soma-env.yaml") as f:
-            environment_version = yaml.safe_load(f)["version"]
+        with open(self.soma_root / "conf" / "soma-env.json") as f:
+            environment_version = json.load(f)["version"]
 
         # Get the release history for selected environment (e.g.
         # environment="6.0") from the publication directory.
@@ -298,8 +298,8 @@ class Commands:
         plan_dir.mkdir()
 
         # Read environment version
-        with open(self.soma_root / "conf" / "soma-env.yaml") as f:
-            environment_version = yaml.safe_load(f)["version"]
+        with open(self.soma_root / "conf" / "soma-env.json") as f:
+            environment_version = json.load(f)["version"]
         development_environment = environment_version.startswith("0.")
 
         # Get the release history for selected environment (e.g.
@@ -453,6 +453,10 @@ class Commands:
                 )
             recipes[package] = recipe
 
+        if not selected_packages:
+            print("Nothing to do.")
+            return
+        
         # Select new packages that are compiled and depend on, at least, one selected compiled package
         selection_modified = True
         while selection_modified:
@@ -473,6 +477,7 @@ class Commands:
                             selected_packages.add(package)
                             selection_modified = True
 
+    
         # Generate rattler-build recipe and action for soma-env package
         print(f"Generate recipe for soma-env {future_published_soma_env_version}")
         (plan_dir / "recipes" / "soma-env").mkdir(exist_ok=True, parents=True)

@@ -1,5 +1,4 @@
-import os
-import pathlib
+import json
 import yaml
 
 import brainvisa_cmake.brainvisa_projects as brainvisa_projects
@@ -10,8 +9,8 @@ def read_recipes(soma_root):
     Iterate over all recipes files defined in soma-forge.
     """
     # Read environment version
-    with open(soma_root / "conf" / "soma-env.yaml") as f:
-        environment_version = yaml.safe_load(f)["version"]
+    with open(soma_root / "conf" / "soma-env.json") as f:
+        environment_version = json.load(f)["version"]
     development_environment = environment_version.startswith("0.")
 
     src_dir = soma_root / "src"
