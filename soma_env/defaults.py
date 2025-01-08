@@ -1,1 +1,0 @@
-default_publication_directory = "/drf/neuro-forge/public"

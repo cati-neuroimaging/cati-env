@@ -28,10 +28,6 @@ version = {attr = "soma_env.__version__"}
 [project.urls]
 repository = "https://github.com/brainvisa/soma-env"
 
-
-[project.scripts]
-soma-env = "soma_env.cli:main"
-
 [tool.setuptools]
 packages=["soma_env"]
 
@@ -69,9 +65,6 @@ six = "*"
 sphinx = "*"
 toml = "*"
 virtualgl = "*"
-
-[tool.pixi.pypi-dependencies]
-soma_env = { path = ".", editable = true }
 
 [tool.pixi.activation]
 scripts = ["activate.sh"]
