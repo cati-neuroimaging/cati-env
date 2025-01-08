@@ -376,8 +376,9 @@ class Commands:
                     )
                     selected_packages.add(package)
                 elif changesets != latest_changesets:
+                    changes = sorted(i for i in changesets if changesets[i] != latest_changesets.get(i))
                     print(
-                        f"Select {package} for building because some source has changed since latest release"
+                        f"Select {package} for building because some source has changed (in {' '.join(changes)}) since latest release"
                     )
                     selected_packages.add(package)
                 else:
