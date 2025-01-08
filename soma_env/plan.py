@@ -62,7 +62,7 @@ def rebuild(context):
             "pixi",
             "run",
             "--manifest-path",
-            str(context.soma_root / "pixi.toml"),
+            str(context.soma_root / "pyproject.toml"),
             "bv_maker",
             "configure",
             "build",

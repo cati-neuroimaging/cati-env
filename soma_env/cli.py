@@ -113,6 +113,7 @@ class Commands:
                 print(f"WARNING: {release_history_file} does not exist")
 
         actions = []
+        commit_actions = []
 
         for recipe in read_recipes(self.soma_root):
             package = recipe["package"]["name"]
@@ -162,39 +163,53 @@ class Commands:
                             f"Set {package} version from {latest_release_version} to {new_version}"
                         )
                         # Find file to change
-                        src = next(recipe["soma-env"]["components"].values())
-                        file = src / "project_info.cmake"
+                        src = next(iter(recipe["soma-env"]["components"].values()))
+                        file = src / "pyproject.toml"
                         if file.exists():
                             version_regexps = (
                                 re.compile(
-                                    r"(\bset\s*\(\s*BRAINVISA_PACKAGE_VERSION_MAJOR\s*)"
-                                    r"([0-9]+)(\s*\))",
-                                    re.IGNORECASE,
+                                    r'(\bversion\s*=\s*")([0-9]+)(\.[0-9]+\.[0-9]+")'
                                 ),
                                 re.compile(
-                                    r"(\bset\s*\(\s*BRAINVISA_PACKAGE_VERSION_MINOR\s*)"
-                                    r"([0-9]+)(\s*\))",
-                                    re.IGNORECASE,
+                                    r'(\bversion\s*=\s*"[0-9]+\.)([0-9]+)(\.[0-9]+")'
                                 ),
                                 re.compile(
-                                    r"(\bset\s*\(\s*BRAINVISA_PACKAGE_VERSION_PATCH\s*)"
-                                    r"([0-9]+)(\s*\))",
-                                    re.IGNORECASE,
+                                    r'(\bversion\s*=\s*"[0-9]+\.[0-9]+\.)([0-9]+)(")'
                                 ),
                             )
                         else:
-                            version_regexps = (
-                                re.compile(r"(\bversion_major\s*=\s*)([0-9]+)(\b)"),
-                                re.compile(r"(\bversion_minor\s*=\s*)([0-9]+)(\b)"),
-                                re.compile(r"(\bversion_micro\s*=\s*)([0-9]+)(\b)"),
-                            )
-                            files = list(
-                                itertools.chain(
-                                    src.glob("info.py"),
-                                    src.glob("*/info.py"),
-                                    src.glob("python/*/info.py"),
+                            file = src / "project_info.cmake"
+                            if file.exists():
+                                version_regexps = (
+                                    re.compile(
+                                        r"(\bset\s*\(\s*BRAINVISA_PACKAGE_VERSION_MAJOR\s*)"
+                                        r"([0-9]+)(\s*\))",
+                                        re.IGNORECASE,
+                                    ),
+                                    re.compile(
+                                        r"(\bset\s*\(\s*BRAINVISA_PACKAGE_VERSION_MINOR\s*)"
+                                        r"([0-9]+)(\s*\))",
+                                        re.IGNORECASE,
+                                    ),
+                                    re.compile(
+                                        r"(\bset\s*\(\s*BRAINVISA_PACKAGE_VERSION_PATCH\s*)"
+                                        r"([0-9]+)(\s*\))",
+                                        re.IGNORECASE,
+                                    ),
                                 )
-                            )
+                            else:
+                                version_regexps = (
+                                    re.compile(r"(\bversion_major\s*=\s*)([0-9]+)(\b)"),
+                                    re.compile(r"(\bversion_minor\s*=\s*)([0-9]+)(\b)"),
+                                    re.compile(r"(\bversion_micro\s*=\s*)([0-9]+)(\b)"),
+                                )
+                                files = list(
+                                    itertools.chain(
+                                        src.glob("info.py"),
+                                        src.glob("*/info.py"),
+                                        src.glob("python/*/info.py"),
+                                    )
+                                )
                             if not files:
                                 raise RuntimeError(
                                     f"Cannot find component version file (info.py or project_info.cmake) in {src}"
@@ -203,10 +218,10 @@ class Commands:
                         with open(file) as f:
                             file_contents = f.read()
                         for regex, version_component in zip(
-                            version_regexps, new_version
+                            version_regexps, new_version.split(".")
                         ):
                             file_contents, _ = regex.subn(
-                                f"\\g<1>{version_component:d}\\g<3>", file_contents
+                                f"\\g<1>{version_component}\\g<3>", file_contents
                             )
                         print(
                             f"Create action to modify {file} to set {package} version from {latest_release_version} to {new_version}"
@@ -220,9 +235,23 @@ class Commands:
                                 },
                             }
                         )
+                        commit_actions.append(
+                            {
+                                "action": "git_commit",
+                                "kwargs": {
+                                    "repo": str(src),
+                                    "modified": [str(file)],
+                                    "message": f"Set package {package} from version {latest_release_version} to version {new_version}",
+                                },
+                            }
+                        )
 
                 else:
                     print(f"No change detected in package {package}")
+
+        if commit_actions:
+            actions.extend(commit_actions)
+            actions.append({"action": "rebuild"})
 
         with open(plan_dir / "actions.yaml", "w") as f:
             yaml.safe_dump(
