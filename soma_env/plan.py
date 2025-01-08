@@ -7,7 +7,6 @@ import shutil
 import subprocess
 import sys
 import toml
-import yaml
 
 
 def check_build_status(context):

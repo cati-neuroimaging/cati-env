@@ -16,7 +16,7 @@ import yaml
 
 from .defaults import default_publication_directory
 from .recipes import sorted_recipies, find_soma_env_packages, read_recipes
-import soma_env.plan
+from . import plan as plan_module
 
 
 class Commands:
@@ -594,7 +594,7 @@ class Commands:
         context.soma_root = self.soma_root
         for action in actions:
             if action.get("status") != "success":
-                getattr(soma_env.plan, action["action"])(
+                getattr(plan_module, action["action"])(
                     context, *action.get("args", []), **action.get("kwargs", {})
                 )
                 action["status"] = "success"
