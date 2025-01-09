@@ -1,5 +1,5 @@
 [project]
-name = "soma-env-0.0."
+name = "soma-env-0.0"
 channels = ["conda-forge", "https://brainvisa.info/neuro-forge"]
 platforms = ["linux-64"]
 version = "0.0"
