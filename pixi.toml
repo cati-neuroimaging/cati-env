@@ -1,0 +1,39 @@
+[project]
+name = "soma-env-0.0."
+channels = ["conda-forge", "https://brainvisa.info/neuro-forge"]
+platforms = ["linux-64"]
+version = "0.0"
+
+[dependencies]
+# Default Python version can be changed
+# with pixi before building
+python = "3.11.*"
+
+fire = "*"
+conda-build = "*"
+
+# Dependencies for brainvisa-cmake
+pyyaml = "*"
+dateutils = "*"
+cmake = "*"
+gcc = "*"
+git = "*"
+gitpython = "*"
+gxx = "*"
+libglu = "*"
+libglvnd-devel-cos7-x86_64 = "*"
+libstdcxx-devel_linux-64 = "*"
+make = "*"
+mesa-libgl-devel-cos7-x86_64 = "*"
+mesalib-devel-only = "*"
+pip = "*"
+pyaml = "*"
+pytest = "*"
+rattler-build = ">=0.13"
+six = "*"
+sphinx = "*"
+toml = "*"
+virtualgl = "*"
+
+[activation]
+scripts = ["activate.sh"]
