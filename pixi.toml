@@ -35,5 +35,9 @@ sphinx = "*"
 toml = "*"
 virtualgl = "*"
 
+[dependencies.libjpeg-turbo]
+channel = "conda-forge"
+version = ">=3.0.0"
+
 [activation]
 scripts = ["activate.sh"]
