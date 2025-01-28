@@ -1,6 +1,25 @@
 {
   "name": "soma-env",
   "version": "0.0",
+  "packages": [
+    "anatomist",
+    "bioprocessing",
+    "brainrat",
+    "capsul",
+    "constellation",
+    "cortical-surface",
+    "disco",
+    "highres-cortex",
+    "morphologist",
+    "morphologist-baby",
+    "nuclear-imaging",
+    "populse-db",
+    "primatologist",
+    "soma",
+    "soma-freesurfer",
+    "soma-python",
+    "soma-spm"
+  ],
   "publication": {
     "neuro-forge": {
       "url": "https://brainvisa.info/neuro-forge",
