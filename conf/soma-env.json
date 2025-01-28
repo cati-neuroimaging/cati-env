@@ -1,6 +1,7 @@
 {
   "name": "soma-env",
   "version": "0.0",
+  "publication": "neuro-forge",
   "packages": {
     "anatomist": null,
     "bioprocessing": null,
@@ -19,14 +20,5 @@
     "soma-freesurfer": null,
     "soma-python": null,
     "soma-spm": null
-  },
-  "publication": {
-    "neuro-forge": {
-      "url": "https://brainvisa.info/neuro-forge",
-      "directory": "/drf/neuro-forge/public"
-    },
-    "brainvisa-cea": {
-      "directory": "/drf/neuro-forge/brainvisa-cea"
-    }
   }
 }
