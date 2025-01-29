@@ -1,24 +1,25 @@
 {
-  "name": "soma-env",
-  "version": "0.0",
-  "publication": "neuro-forge",
-  "packages": {
-    "anatomist": null,
-    "bioprocessing": null,
-    "brainrat": null,
-    "capsul": null,
-    "constellation": null,
-    "cortical-surface": null,
-    "disco": null,
-    "highres-cortex": null,
-    "morphologist": null,
-    "morphologist-baby": null,
-    "nuclear-imaging": null,
-    "populse-db": null,
-    "primatologist": null,
-    "soma": null,
-    "soma-freesurfer": null,
-    "soma-python": null,
-    "soma-spm": null
-  }
+    "latest_release": "0.0.7",
+    "name": "soma-env",
+    "packages": {
+        "anatomist": "0.0.7",
+        "bioprocessing": "0.0.7",
+        "brainrat": "0.0.7",
+        "capsul": "0.0.7",
+        "constellation": "0.0.7",
+        "cortical-surface": "0.0.7",
+        "disco": "0.0.7",
+        "highres-cortex": "0.0.7",
+        "morphologist": "0.0.7",
+        "morphologist-baby": "0.0.7",
+        "nuclear-imaging": "0.0.7",
+        "populse-db": "0.0.7",
+        "primatologist": "0.0.7",
+        "soma": "0.0.7",
+        "soma-freesurfer": "0.0.7",
+        "soma-python": "0.0.7",
+        "soma-spm": "0.0.7"
+    },
+    "publication": "neuro-forge",
+    "version": "0.0"
 }
