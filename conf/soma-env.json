@@ -1,99 +1,25 @@
 {
-  "version": "0.0",
-  "packages": {
-    "anatomist": [
-      "anatomist-free",
-      "https://github.com/brainvisa/anatomist-free.git",
-      "master"
-    ],
-    "bioprocessing": [
-      "bioprocessing",
-      "https://bioproj.extra.cea.fr/git/bioprocessing",
-      "master"
-    ],
-    "brainrat": [
-      "brainrat-private",
-      "https://bioproj.extra.cea.fr/git/brainrat-private",
-      "master"
-    ],
-    "capsul": [
-      "capsul",
-      "https://github.com/populse/capsul.git",
-      "master"
-    ],
-    "constellation": [
-      "constellation-gpl",
-      "https://github.com/brainvisa/constellation-gpl.git",
-      "master"
-    ],
-    "cortical-surface": [
-      "cortical_surface-gpl",
-      "https://github.com/brainvisa/cortical_surface-gpl.git",
-      "master"
-    ],
-    "disco": [
-      "disco",
-      "https://bioproj.extra.cea.fr/git/brainvisa-disco",
-      "master"
-    ],
-    "highres-cortex": [
-      "highres-cortex",
-      "https://github.com/neurospin/highres-cortex.git",
-      "master"
-    ],
-    "morphologist": [
-      "morphologist-nonfree",
-      "https://github.com/brainvisa/morphologist-nonfree.git",
-      "master"
-    ],
-    "morphologist-baby": [
-      "morphologist-baby",
-      "https://bioproj.extra.cea.fr/git/brainvisa-t1mri/morphologist-baby.git",
-      "master"
-    ],
-    "nuclear-imaging": [
-      "nuclear_imaging-nonfree",
-      "https://github.com/cati-neuroimaging/nuclear_imaging-nonfree.git",
-      "master"
-    ],
-    "populse-db": [
-      "populse-db",
-      "https://github.com/populse/populse_db.git",
-      "master"
-    ],
-    "primatologist": [
-      "primatologist-gpl",
-      "https://bioproj.extra.cea.fr/git/primatologist-gpl",
-      "master"
-    ],
-    "soma": [
-      "soma-io",
-      "https://github.com/brainvisa/soma-io.git",
-      "master"
-    ],
-    "soma-freesurfer": [
-      "brainvisa_freesurfer",
-      "https://github.com/brainvisa/brainvisa_freesurfer.git",
-      "master"
-    ],
-    "soma-python": [
-      "soma-base",
-      "https://github.com/populse/soma-base.git",
-      "master"
-    ],
-    "soma-spm": [
-      "brainvisa-spm",
-      "https://github.com/brainvisa/brainvisa-spm.git",
-      "master"
-    ]
-  },
-  "publication": {
-    "neuro-forge": {
-      "url": "https://brainvisa.info/neuro-forge",
-      "directory": "/drf/neuro-forge/public"
+    "latest_release": "0.0.7",
+    "name": "soma-env",
+    "packages": {
+        "anatomist": "0.0.7",
+        "bioprocessing": "0.0.7",
+        "brainrat": "0.0.7",
+        "capsul": "0.0.7",
+        "constellation": "0.0.7",
+        "cortical-surface": "0.0.7",
+        "disco": "0.0.7",
+        "highres-cortex": "0.0.7",
+        "morphologist": "0.0.7",
+        "morphologist-baby": "0.0.7",
+        "nuclear-imaging": "0.0.7",
+        "populse-db": "0.0.7",
+        "primatologist": "0.0.7",
+        "soma": "0.0.7",
+        "soma-freesurfer": "0.0.7",
+        "soma-python": "0.0.7",
+        "soma-spm": "0.0.7"
     },
-    "brainvisa-cea": {
-      "directory": "/drf/neuro-forge/brainvisa-cea"
-    }
-  }
+    "publication": "neuro-forge",
+    "version": "0.0"
 }

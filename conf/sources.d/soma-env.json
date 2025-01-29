@@ -1,0 +1,161 @@
+{
+    "aims-free": {
+        "branch": "master",
+        "changeset": "0084c21008856f1679532d8d97a763ed95071c28",
+        "url": "https://github.com/brainvisa/aims-free.git"
+    },
+    "aims-gpl": {
+        "branch": "master",
+        "changeset": "87e39e95e48102194a61cae04915cae6d94202ad",
+        "url": "https://github.com/brainvisa/aims-gpl.git"
+    },
+    "anatomist-free": {
+        "branch": "master",
+        "changeset": "97461f0f56a970cf3cd6a491c3c83ddc25fbbedc",
+        "url": "https://github.com/brainvisa/anatomist-free.git"
+    },
+    "anatomist-gpl": {
+        "branch": "master",
+        "changeset": "dd834d7949f705e5cd3c2f177d6ce46e4b817354",
+        "url": "https://github.com/brainvisa/anatomist-gpl.git"
+    },
+    "axon": {
+        "branch": "master",
+        "changeset": "72be634f96917b36b1623492c8a9935fbf556f07",
+        "url": "https://github.com/brainvisa/axon.git"
+    },
+    "bioprocessing": {
+        "branch": "master",
+        "changeset": "077f3171e05fd3b192be1ed264b4f3abc5aba0ae",
+        "url": "https://bioproj.extra.cea.fr/git/bioprocessing"
+    },
+    "brainrat-gpl": {
+        "branch": "master",
+        "changeset": "d4cbd1183ab68f0598ddf137c99c61c974f7354a",
+        "url": "https://bioproj.extra.cea.fr/git/brainrat-gpl"
+    },
+    "brainrat-private": {
+        "branch": "master",
+        "changeset": "d2a3fd6f465dc6a3a6aaec9fb8ccfca42a140b52",
+        "url": "https://bioproj.extra.cea.fr/git/brainrat-private"
+    },
+    "brainvisa-cmake": {
+        "branch": "soma-env",
+        "url": "https://github.com/brainvisa/brainvisa-cmake"
+    },
+    "brainvisa-share": {
+        "branch": "master",
+        "changeset": "38f65ef3a97af52084e3c63d23e7e6f86416fa73",
+        "url": "https://github.com/brainvisa/brainvisa-share.git"
+    },
+    "brainvisa-spm": {
+        "branch": "master",
+        "changeset": "c1906d4caf76c130cba1afc903637e6cc7dcc600",
+        "url": "https://github.com/brainvisa/brainvisa-spm.git"
+    },
+    "brainvisa_freesurfer": {
+        "branch": "master",
+        "changeset": "a40875d56dedad4c5e882b9e4cd76716df36d2dd",
+        "url": "https://github.com/brainvisa/brainvisa_freesurfer.git"
+    },
+    "capsul": {
+        "branch": "master",
+        "changeset": "81fb00c364fc6a4561731d2e842744351ff8707f",
+        "url": "https://github.com/populse/capsul.git"
+    },
+    "constellation-gpl": {
+        "branch": "master",
+        "changeset": "ea5df9f79bb0ef7deac452b3663756d1b33311c5",
+        "url": "https://github.com/brainvisa/constellation-gpl.git"
+    },
+    "constellation-nonfree": {
+        "branch": "master",
+        "changeset": "ccb3558aa220216e341a9b05d6149415d3720b4c",
+        "url": "https://github.com/brainvisa/constellation-nonfree.git"
+    },
+    "cortical_surface-gpl": {
+        "branch": "master",
+        "changeset": "04f5e7e02a4daff4a638e6bf35bf18f5e08683e5",
+        "url": "https://github.com/brainvisa/cortical_surface-gpl.git"
+    },
+    "cortical_surface-nonfree": {
+        "branch": "master",
+        "changeset": "c20dd904ef0582e6e82dc9877f540fecb56c5f47",
+        "url": "https://github.com/brainvisa/cortical_surface-nonfree.git"
+    },
+    "disco": {
+        "branch": "master",
+        "changeset": "1a085c29b048c31e45ea967950aafaebccf5d91f",
+        "url": "https://bioproj.extra.cea.fr/git/brainvisa-disco"
+    },
+    "highres-cortex": {
+        "branch": "master",
+        "changeset": "a2d6a7d2b0b1d07a3a3333d7826a6f607024d5aa",
+        "url": "https://github.com/neurospin/highres-cortex.git"
+    },
+    "morpho-deepsulci": {
+        "branch": "master",
+        "changeset": "1906692353e08865e010a80b170c69cb618f0953",
+        "url": "https://github.com/brainvisa/morpho-deepsulci.git"
+    },
+    "morphologist-baby": {
+        "branch": "master",
+        "changeset": "25f60fe9ef4a337d9b3f5ca5863582b8e331e1d2",
+        "url": "https://bioproj.extra.cea.fr/git/brainvisa-t1mri/morphologist-baby.git"
+    },
+    "morphologist-gpl": {
+        "branch": "master",
+        "changeset": "9e4d04bed08afaadde7b66522e3e8bc35c8a735a",
+        "url": "https://github.com/brainvisa/morphologist-gpl.git"
+    },
+    "morphologist-nonfree": {
+        "branch": "master",
+        "changeset": "281ead35928e75713f2aa7642d7b2795ddc1ef9e",
+        "url": "https://github.com/brainvisa/morphologist-nonfree.git"
+    },
+    "morphologist-ui": {
+        "branch": "master",
+        "changeset": "c22bab83cb0c3dc289b0bc63d481cc6f99a70bbf",
+        "url": "https://github.com/brainvisa/morphologist.git"
+    },
+    "nuclear_imaging-gpl": {
+        "branch": "master",
+        "changeset": "d558e1becd5525c0e8bd210dbbfe6f5209f80381",
+        "url": "https://github.com/cati-neuroimaging/nuclear_imaging-gpl.git"
+    },
+    "nuclear_imaging-nonfree": {
+        "branch": "master",
+        "changeset": "70608fe7e8bdcdef443ecb9f705495871c58b4e7",
+        "url": "https://github.com/cati-neuroimaging/nuclear_imaging-nonfree.git"
+    },
+    "populse-db": {
+        "branch": "master",
+        "changeset": "d14a43a6b524b5a14d277d10f91dd85ccef9c037",
+        "url": "https://github.com/populse/populse_db.git"
+    },
+    "primatologist-gpl": {
+        "branch": "master",
+        "changeset": "c2a9bd81ec048c108c2aa58ed85c4df158c455b4",
+        "url": "https://bioproj.extra.cea.fr/git/primatologist-gpl"
+    },
+    "soma-base": {
+        "branch": "master",
+        "changeset": "558b5474fadb9b1c9ba0c309273a7f6bf8268ffe",
+        "url": "https://github.com/populse/soma-base.git"
+    },
+    "soma-io": {
+        "branch": "master",
+        "changeset": "472aead7b45baf9e180d971be1058d4edffb29a6",
+        "url": "https://github.com/brainvisa/soma-io.git"
+    },
+    "soma-workflow": {
+        "branch": "master",
+        "changeset": "38cb94daaee2db788301338533b9ff5255c99788",
+        "url": "https://github.com/populse/soma-workflow.git"
+    },
+    "sulci-nonfree": {
+        "branch": "master",
+        "changeset": "a56bbae4c2810c02128a25821f0a315dee721568",
+        "url": "https://github.com/brainvisa/sulci-nonfree.git"
+    }
+}
