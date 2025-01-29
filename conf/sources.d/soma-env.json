@@ -40,7 +40,7 @@
         "url": "https://bioproj.extra.cea.fr/git/brainrat-private"
     },
     "brainvisa-cmake": {
-        "branch": "soma-env",
+        "branch": "master",
         "url": "https://github.com/brainvisa/brainvisa-cmake"
     },
     "brainvisa-share": {
