@@ -1,6 +1,6 @@
 {
   "name": "soma-env",
-  "version": "0.0",
+  "version": "6.0",
   "publication": "neuro-forge",
   "packages": {
     "anatomist": null,
