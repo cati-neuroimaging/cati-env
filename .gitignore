@@ -2,6 +2,7 @@
 src
 build
 plan
+tests
 conf/build_info.json
 */__pycache__
 *.egg-info
