@@ -1,7 +1,7 @@
 {
     "aims-free": {
         "branch": "master",
-        "changeset": "0084c21008856f1679532d8d97a763ed95071c28",
+        "changeset": "dcec9a6d1ddc047b1647f1ffbc142fe9fd0fb4f6",
         "url": "https://github.com/brainvisa/aims-free.git"
     },
     "aims-gpl": {
@@ -21,7 +21,7 @@
     },
     "axon": {
         "branch": "master",
-        "changeset": "72be634f96917b36b1623492c8a9935fbf556f07",
+        "changeset": "bcb0ffe489863268bd65ce3ef852af67c231b71f",
         "url": "https://github.com/brainvisa/axon.git"
     },
     "bioprocessing": {
@@ -110,7 +110,7 @@
     },
     "morphologist-nonfree": {
         "branch": "master",
-        "changeset": "281ead35928e75713f2aa7642d7b2795ddc1ef9e",
+        "changeset": "c8cf86b753bf028aa6b1da41b813d1d0ad7d784d",
         "url": "https://github.com/brainvisa/morphologist-nonfree.git"
     },
     "morphologist-ui": {

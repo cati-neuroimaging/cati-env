@@ -81,6 +81,7 @@ pandas = "*"
 libgl = "*"
 libopengl = "*"
 pydicom = "*"
+pre-commit = ">=4.1.0,<5"
 
 [dependencies.libjpeg-turbo]
 channel = "conda-forge"
