@@ -1,5 +1,4 @@
 {
-    "latest_release": "0.0.8",
     "name": "soma-env",
     "packages": {
         "anatomist": "0.0.7",
@@ -21,5 +20,5 @@
         "soma-spm": "0.0.7"
     },
     "publication": "neuro-forge",
-    "version": "0.0"
+    "version": "0.0.8"
 }
