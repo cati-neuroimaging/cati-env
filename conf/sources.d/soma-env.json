@@ -60,7 +60,7 @@
     },
     "capsul": {
         "branch": "master",
-        "changeset": "81fb00c364fc6a4561731d2e842744351ff8707f",
+        "changeset": "937a4124e547dee2127690da54c8b2e9fb134a44",
         "url": "https://github.com/populse/capsul.git"
     },
     "constellation-gpl": {
@@ -140,7 +140,7 @@
     },
     "soma-base": {
         "branch": "master",
-        "changeset": "558b5474fadb9b1c9ba0c309273a7f6bf8268ffe",
+        "changeset": "b3d2f194712cc2dd8b0493e8cd6b3ea6ee303cd8",
         "url": "https://github.com/populse/soma-base.git"
     },
     "soma-io": {

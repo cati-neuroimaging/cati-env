@@ -1,11 +1,11 @@
 {
-    "latest_release": "0.0.7",
+    "latest_release": "0.0.8",
     "name": "soma-env",
     "packages": {
         "anatomist": "0.0.7",
         "bioprocessing": "0.0.7",
         "brainrat": "0.0.7",
-        "capsul": "0.0.7",
+        "capsul": "0.0.8",
         "constellation": "0.0.7",
         "cortical-surface": "0.0.7",
         "disco": "0.0.7",
@@ -17,7 +17,7 @@
         "primatologist": "0.0.7",
         "soma": "0.0.7",
         "soma-freesurfer": "0.0.7",
-        "soma-python": "0.0.7",
+        "soma-python": "0.0.8",
         "soma-spm": "0.0.7"
     },
     "publication": "neuro-forge",
