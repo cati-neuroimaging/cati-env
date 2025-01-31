@@ -21,13 +21,13 @@ fi
 # for interactive shells, source bash completions
 if [[ $SHELL == "/bin/bash" ]] && [[ $- == *i* ]]
 then
-    if [ -d "$SOMA_ROOT/build/etc/bash-completion.d" ]; then
-        for f in "$SOMA_ROOT/build/etc/bash-completion.d"/*; do
+    if [ -d "$SOMA_ROOT/build/etc/bash_completion.d" ]; then
+        for f in "$SOMA_ROOT/build/etc/bash_completion.d"/*; do
             . "$f"
         done
     fi
-    if [ -d "$SOMA_ROOT/src/brainvisa-cmake/etc/bash-completion.d" ]; then
-        for f in "$SOMA_ROOT/src/brainvisa-cmake/etc/bash-completion.d"/*; do
+    if [ -d "$SOMA_ROOT/src/brainvisa_cmake/etc/bash-completion.d" ]; then
+        for f in "$SOMA_ROOT/src/brainvisa_cmake/etc/bash-completion.d"/*; do
             . "$f"
         done
     fi
