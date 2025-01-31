@@ -26,8 +26,8 @@ then
             . "$f"
         done
     fi
-    if [ -d "$SOMA_ROOT/src/brainvisa_cmake/etc/bash-completion.d" ]; then
-        for f in "$SOMA_ROOT/src/brainvisa_cmake/etc/bash-completion.d"/*; do
+    if [ -d "$SOMA_ROOT/src/brainvisa_cmake/etc/bash_completion.d" ]; then
+        for f in "$SOMA_ROOT/src/brainvisa_cmake/etc/bash_completion.d"/*; do
             . "$f"
         done
     fi
