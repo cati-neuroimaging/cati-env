@@ -18,4 +18,17 @@ if [ ! -e "$SOMA_ROOT/conf/build_info.json" ] ; then
     echo '{}' > "$SOMA_ROOT/conf/build_info.json"
 fi
 
-
+# for interactive shells, source bash completions
+if [[ $SHELL == "/bin/bash" ]] && [[ $- == *i* ]]
+then
+    if [ -d "$SOMA_ROOT/build/etc/bash-completion.d" ]; then
+        for f in "$SOMA_ROOT/build/etc/bash-completion.d"/*; do
+            . "$f"
+        done
+    fi
+    if [ -d "$SOMA_ROOT/src/brainvisa-cmake/etc/bash-completion.d" ]; then
+        for f in "$SOMA_ROOT/src/brainvisa-cmake/etc/bash-completion.d"/*; do
+            . "$f"
+        done
+    fi
+fi
