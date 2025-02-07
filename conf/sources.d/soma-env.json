@@ -1,7 +1,7 @@
 {
     "aims-free": {
         "branch": "master",
-        "changeset": "dcec9a6d1ddc047b1647f1ffbc142fe9fd0fb4f6",
+        "changeset": "167bd11a7eb366efad22dbfd05c75ad3a93d9dd5",
         "url": "https://github.com/brainvisa/aims-free.git"
     },
     "aims-gpl": {
@@ -11,12 +11,12 @@
     },
     "anatomist-free": {
         "branch": "master",
-        "changeset": "97461f0f56a970cf3cd6a491c3c83ddc25fbbedc",
+        "changeset": "bed9c8ed1f6a7469265f8dccd8d32ddeba4ceb74",
         "url": "https://github.com/brainvisa/anatomist-free.git"
     },
     "anatomist-gpl": {
         "branch": "master",
-        "changeset": "dd834d7949f705e5cd3c2f177d6ce46e4b817354",
+        "changeset": "7713989709636ae3701840ec8660c9e9b6594de8",
         "url": "https://github.com/brainvisa/anatomist-gpl.git"
     },
     "axon": {
@@ -50,7 +50,7 @@
     },
     "brainvisa-spm": {
         "branch": "master",
-        "changeset": "c1906d4caf76c130cba1afc903637e6cc7dcc600",
+        "changeset": "b9d4f9c00dd2cbed669c6c00cd557e2a11b92ebe",
         "url": "https://github.com/brainvisa/brainvisa-spm.git"
     },
     "brainvisa_freesurfer": {
@@ -93,6 +93,7 @@
         "changeset": "a2d6a7d2b0b1d07a3a3333d7826a6f607024d5aa",
         "url": "https://github.com/neurospin/highres-cortex.git"
     },
+    "latest_release": "0.0.11",
     "morpho-deepsulci": {
         "branch": "master",
         "changeset": "1906692353e08865e010a80b170c69cb618f0953",
@@ -130,7 +131,7 @@
     },
     "populse-db": {
         "branch": "master",
-        "changeset": "d14a43a6b524b5a14d277d10f91dd85ccef9c037",
+        "changeset": "9eef1ef27aefa1e60963d8e876e371082ee7cfc8",
         "url": "https://github.com/populse/populse_db.git"
     },
     "primatologist-gpl": {
@@ -140,7 +141,7 @@
     },
     "soma-base": {
         "branch": "master",
-        "changeset": "1c81e6b50d3e248afd247b704177f174df9f572b",
+        "changeset": "8c095a5c4dd1f7f539351a601e2b1a1da3d066df",
         "url": "https://github.com/populse/soma-base.git"
     },
     "soma-io": {
