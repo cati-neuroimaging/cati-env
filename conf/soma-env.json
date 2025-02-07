@@ -1,25 +1,13 @@
 {
-    "latest_release": "0.0.10",
-    "name": "soma-env",
+    "name": "cati-env",
+    "base": "soma-env",
     "packages": {
-        "anatomist": "0.0.9",
-        "bioprocessing": "0.0.9",
-        "brainrat": "0.0.9",
-        "capsul": "0.0.9",
-        "constellation": "0.0.9",
-        "cortical-surface": "0.0.9",
-        "disco": "0.0.9",
-        "highres-cortex": "0.0.9",
-        "morphologist": "0.0.9",
-        "morphologist-baby": "0.0.9",
-        "nuclear-imaging": "0.0.9",
-        "populse-db": "0.0.9",
-        "primatologist": "0.0.9",
-        "soma": "0.0.9",
-        "soma-freesurfer": "0.0.9",
-        "soma-python": "0.0.10",
-        "soma-spm": "0.0.9"
+        "catidb-client": null,
+        "deidentification": null,
+        "qualicati": null,
+        "sacha-nonfree": null,
+        "whasa-nonfree": null
     },
-    "publication": "neuro-forge",
+    "publication": "cati-forge",
     "version": "0.0"
 }
