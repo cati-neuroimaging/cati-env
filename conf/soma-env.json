@@ -2,11 +2,13 @@
     "name": "cati-env",
     "base": "soma-env",
     "packages": {
-        "catidb-client": null,
-        "deidentification": null,
+        "catidb": null,
+        "cati-deidentification": null,
         "qualicati": null,
-        "sacha-nonfree": null,
-        "whasa-nonfree": null
+        "cati-sacha": null,
+        "cati-whasa": null,
+        "cati-rsfmri": null,
+        "cati-longitudinal": null
     },
     "publication": "cati-forge",
     "version": "0.0"

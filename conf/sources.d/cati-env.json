@@ -1,0 +1,38 @@
+{
+    "catidb-client": {
+        "branch": "main",
+        "url": "https://github.com/cati-neuroimaging/catidb-client.git"
+    },
+    "deidentification": {
+        "branch": "develop",
+        "url": "https://github.com/cati-neuroimaging/deidentification.git"
+    },
+    "longitudinal_pipelines": {
+        "branch": "master",
+        "url": "https://github.com/cati-neuroimaging/longitudinal_pipelines.git"
+    },
+    "qualicati": {
+        "branch": "main",
+        "url": "https://github.com/cati-neuroimaging/qualicati.git"
+    },
+    "rsfmri": {
+        "branch": "master",
+        "url": "https://github.com/cati-neuroimaging/rsfmri.git"
+    },
+    "sacha-gpl": {
+        "branch": "master",
+        "url": "https://github.com/cati-neuroimaging/sacha-gpl.git"
+    },
+    "sacha-nonfree": {
+        "branch": "master",
+        "url": "https://github.com/cati-neuroimaging/sacha-nonfree.git"
+    },
+    "whasa-gpl": {
+        "branch": "master",
+        "url": "https://github.com/cati-neuroimaging/whasa-gpl.git"
+    },
+    "whasa-nonfree": {
+        "branch": "master",
+        "url": "https://github.com/cati-neuroimaging/whasa-nonfree.git"
+    }
+}
