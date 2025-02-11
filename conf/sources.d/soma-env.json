@@ -16,17 +16,17 @@
     },
     "anatomist-gpl": {
         "branch": "master",
-        "changeset": "7713989709636ae3701840ec8660c9e9b6594de8",
+        "changeset": "507e2e2d559a0199805ca35ab70a6473f5b25465",
         "url": "https://github.com/brainvisa/anatomist-gpl.git"
     },
     "axon": {
         "branch": "master",
-        "changeset": "bcb0ffe489863268bd65ce3ef852af67c231b71f",
+        "changeset": "e5ecf46359d8de33d705d2f6bae467dcfb3d69b5",
         "url": "https://github.com/brainvisa/axon.git"
     },
     "bioprocessing": {
         "branch": "master",
-        "changeset": "077f3171e05fd3b192be1ed264b4f3abc5aba0ae",
+        "changeset": "7d84d93daf7490acb2206eac6acf57810f716274",
         "url": "https://bioproj.extra.cea.fr/git/bioprocessing"
     },
     "brainrat-gpl": {
@@ -60,7 +60,7 @@
     },
     "capsul": {
         "branch": "master",
-        "changeset": "937a4124e547dee2127690da54c8b2e9fb134a44",
+        "changeset": "7062c5069b8f3d5f59de639c5b522b39b132baec",
         "url": "https://github.com/populse/capsul.git"
     },
     "constellation-gpl": {
@@ -93,7 +93,7 @@
         "changeset": "a2d6a7d2b0b1d07a3a3333d7826a6f607024d5aa",
         "url": "https://github.com/neurospin/highres-cortex.git"
     },
-    "latest_release": "0.0.11",
+    "latest_release": "0.0.12",
     "morpho-deepsulci": {
         "branch": "master",
         "changeset": "1906692353e08865e010a80b170c69cb618f0953",
@@ -106,7 +106,7 @@
     },
     "morphologist-gpl": {
         "branch": "master",
-        "changeset": "9e4d04bed08afaadde7b66522e3e8bc35c8a735a",
+        "changeset": "d9e6a556d94e9bd8eeac867696b937f69acdde74",
         "url": "https://github.com/brainvisa/morphologist-gpl.git"
     },
     "morphologist-nonfree": {
@@ -141,7 +141,7 @@
     },
     "soma-base": {
         "branch": "master",
-        "changeset": "8c095a5c4dd1f7f539351a601e2b1a1da3d066df",
+        "changeset": "5584c1cba80debe5f90b226a63b4955f9e12ac37",
         "url": "https://github.com/populse/soma-base.git"
     },
     "soma-io": {
