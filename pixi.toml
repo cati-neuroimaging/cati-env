@@ -1,11 +1,11 @@
 [project]
-name = "soma-env-0.0"
+name = "soma-env-0.1"
 channels = ["pytorch", "nvidia", "conda-forge", "https://brainvisa.info/neuro-forge"]
 platforms = ["linux-64"]
-version = "0.0"
+version = "0.1"
 
 [dependencies]
-python = ">=3.10,>=3.9,==3.11"
+python = "==3.11,>=3.9,>=3.10"
 fire = "*"
 conda-build = "*"
 pyyaml = "*"
@@ -57,7 +57,7 @@ pcl = "*"
 configobj = "*"
 pyqtwebkit = "*"
 scipy = "*"
-traits = "<7"
+traits = { version = "<7", build = "*" }
 spm12 = "*"
 reportlab = "*"
 libsvm = "*"
@@ -82,6 +82,7 @@ libgl = "*"
 libopengl = "*"
 pydicom = "*"
 pre-commit = ">=4.1.0,<5"
+scikit-image = "*"
 
 [dependencies.libjpeg-turbo]
 channel = "conda-forge"
