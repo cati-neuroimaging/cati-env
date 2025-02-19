@@ -3,7 +3,7 @@
         "directory": "/drf/neuro-forge/cati"
     },
     "neuro-forge": {
-        "url": "https://brainvisa.info/neuro-forge",
+        "url": "https://brainvisa.info/neuro-forge"
     },
     "brainvisa-cea": {
         "directory": "/drf/neuro-forge/brainvisa-cea"
