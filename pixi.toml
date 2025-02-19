@@ -1,11 +1,11 @@
 [project]
-name = "soma-env-0.1"
+name = "cati-env-0.0"
 channels = ["pytorch", "nvidia", "conda-forge", "https://brainvisa.info/neuro-forge"]
 platforms = ["linux-64"]
-version = "0.1"
+version = "0.0"
 
 [dependencies]
-python = "==3.11,>=3.9,>=3.10"
+python = ">=3.10,==3.11,>=3.9"
 fire = "*"
 conda-build = "*"
 pyyaml = "*"
@@ -81,8 +81,11 @@ pandas = "*"
 libgl = "*"
 libopengl = "*"
 pydicom = "*"
-pre-commit = ">=4.1.0,<5"
+pre-commit = "<5,>=4.1.0"
 scikit-image = "*"
+soma = "*"
+anatomist = "*"
+nibabel = "*"
 
 [dependencies.libjpeg-turbo]
 channel = "conda-forge"
